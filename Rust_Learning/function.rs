@@ -36,7 +36,7 @@ fn square_return(number: i32) -> i32 {
     return number * number;
 }
 //a shortcut for return: if you dont use return keyword rust will automatically
-// return the last line and in this case dont user semicolon
+// return the last line and in this case dont use semicolon
 fn short_squrare_return(number: i32) -> i32 {
     number * number
 }
