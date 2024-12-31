@@ -200,7 +200,7 @@ Coffee { name, price, is_hot }
 ## Important Notes:
 - The shorthand only works if the parameter/variable name matches the struct field name.
 - If they differ (e.g., `my_price` instead of `price`), Rust will not make the connection automatically.
-```
+
 
 ---
 ---
