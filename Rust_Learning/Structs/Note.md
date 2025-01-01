@@ -1,6 +1,6 @@
 # Notes on Structs in Rust
 
-## Struct Overview:
+## L1: Struct Overview:
 A struct is a container for related pieces of data, similar to an object in object-oriented programming. It allows grouping multiple pieces of data together in a single, meaningful unit.
 
 ## Comparison with Tuples:
@@ -34,7 +34,7 @@ Named field structs are particularly useful when modeling real-world objects or 
 ---
 
 
-# Creating an Instance of a Struct
+# L2: Creating an Instance of a Struct
 
 ## Blueprint vs Instance
 A struct defines a blueprint for data, and when we create a concrete value using that blueprint, we call it an instance of the struct.
@@ -60,7 +60,7 @@ When creating an instance of a struct, ensure all fields are provided with valid
 ---
 ---
 
-# Accessing and Understanding Ownership in Structs
+# L3: Accessing and Understanding Ownership in Structs
 
 ## 1. Accessing Struct Fields:
 - To access the value of a struct field, reference the struct variable, followed by a dot (`.`) and the field's name.
@@ -97,7 +97,7 @@ When creating an instance of a struct, ensure all fields are provided with valid
 ---
 
 
-### Overwriting Struct Field Values
+### L4: Overwriting Struct Field Values
 
 1. **Mutability of Struct Instances:**
    - To modify the fields of a struct instance, the struct instance itself must be mutable.
@@ -131,7 +131,7 @@ When creating an instance of a struct, ensure all fields are provided with valid
 ---
 
 
-# Creating and Returning Struct Instances in Rust
+# L5: Creating and Returning Struct Instances in Rust
 
 ## 1. Function Definition and Struct Placement
 - Define a new function (`make_coffee`) that creates and returns a `Coffee` instance.
@@ -178,7 +178,7 @@ When creating an instance of a struct, ensure all fields are provided with valid
 ---
 ---
 
-# Simplified Struct Creation Syntax
+# L6: Simplified Struct Creation Syntax
 
 - Rust allows a shorthand syntax when creating structs if the parameter or variable names match the struct field names.
 - This eliminates the need for the `field: field` syntax and simply uses the field name.
@@ -205,7 +205,7 @@ Coffee { name, price, is_hot }
 ---
 ---
 
-# Struct Update Syntax
+# L7: Struct Update Syntax
 
 ## Creating a New Struct from an Existing One:
 - You can create a new struct instance using values from an existing instance.
@@ -237,7 +237,7 @@ Coffee { name, price, is_hot }
 ---
 ---
 
-# Passing a Struct to Functions in Rust - Notes
+# L8: Passing a Struct to Functions in Rust - Notes
 
 ## Introduction
 - Structs serve as excellent function arguments because they bundle data into a single composite value, making function definitions simpler by reducing the number of parameters.
