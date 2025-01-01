@@ -299,3 +299,110 @@ Coffee { name, price, is_hot }
 
 ## Conclusion
 The choice between passing by value or by reference, and whether to allow mutability, depends on the specific needs of the function and the desired ownership behavior. Using references is often the preferred approach as it avoids unnecessary ownership complications and keeps the design straightforward.
+
+---
+---
+
+### L9: Traits, Display, Debug, and Struct Debug Implementation
+
+#### **Traits Overview**
+- **Traits** define a contract that mandates a type must support one or more methods.
+- A type that implements a trait "promises" to provide certain functionality.
+- Types can choose to implement whichever traits they wish.
+
+#### **Display and Debug Traits**
+- **Display Trait**:
+  - Represents a type as a human-friendly, readable string.
+  - Used in string interpolation with `{}`.
+  - Not all types implement the Display trait (e.g., arrays).
+
+- **Debug Trait**:
+  - Represents a type as a technical string, primarily for developers.
+  - Used with `{:?}` for standard Debug representation.
+  - Used with `{:#?}` for pretty-printed Debug representation.
+
+#### **Example: Arrays and Traits**
+- Arrays do not implement the **Display Trait**:
+  - Using `{}` with an array causes a compile error.
+  - Error: "Array of string slices does not implement the Display trait."
+
+- Arrays implement the **Debug Trait**:
+  - Using `{:?}` or `{:#?}` with an array prints its elements.
+    - `{:?}`: Standard Debug representation.
+    - `{:#?}`: Pretty-printed Debug representation.
+
+#### **Structs and Traits**
+- **Default Behavior**:
+  - Structs do not implement the **Display Trait** or **Debug Trait** by default.
+  - Attempting to use `{}`, `{:?}`, or `{:#?}` results in compile-time errors.
+
+- **Deriving Debug Implementation**:
+  - Rust provides an easy way to derive a Debug implementation for structs.
+  - The derived Debug implementation includes:
+    - Struct name.
+    - Curly braces with fields and their corresponding values.
+
+#### **Derive Attribute for Debug**
+- **Attributes**:
+  - Directives or metadata for the compiler written above a construct.
+  - Customize how the compiler processes the construct.
+
+- **Syntax for Deriving Debug**:
+  ```rust
+  #[derive(Debug)]
+  struct Coffee {
+      price: f64,
+      name: String,
+      is_hot: bool,
+  }
+  ```
+  - `#[derive(Debug)]`: Automatically generates a Debug implementation.
+
+- **Usage**:
+  - `{:?}`: Standard Debug output.
+  - `{:#?}`: Pretty-printed Debug output.
+
+#### **Example: Deriving Debug for Struct**
+```rust
+#[derive(Debug)]
+struct Coffee {
+    price: f64,
+    name: String,
+    is_hot: bool,
+}
+
+fn main() {
+    let mocha = Coffee {
+        name: String::from("Mocha"),
+        price: 4.99,
+        is_hot: true,
+    };
+
+    // Using Debug trait
+    println!("{:?}", mocha);    // Standard Debug representation
+    println!("{:#?}", mocha);  // Pretty-printed Debug representation
+}
+```
+- Output:
+  ```
+  Coffee { name: "Mocha", price: 4.99, is_hot: true }
+
+  Coffee {
+      name: "Mocha",
+      price: 4.99,
+      is_hot: true,
+  }
+  ```
+
+#### **Customizing Debug Implementations**
+- While deriving Debug is a convenient default, you can manually define Debug implementations.
+- Custom implementations allow full control over how a type represents itself for debugging.
+- This will be discussed in later lessons.
+
+#### **Recap**
+- Traits like Display and Debug allow types to be represented as strings.
+- The `#[derive(Debug)]` attribute provides a quick way to enable Debug for structs.
+- Use `{:?}` and `{:#?}` for standard and pretty-printed Debug outputs, respectively.
+- Derived Debug outputs are practical for debugging but can be customized when needed.
+
+
