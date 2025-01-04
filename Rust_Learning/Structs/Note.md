@@ -406,3 +406,83 @@ fn main() {
 - Derived Debug outputs are practical for debugging but can be customized when needed.
 
 
+---
+---
+
+
+### L10: Struct Methods in Rust
+
+**What is a Method?**  
+- A method is like a function, but it "belongs" to a specific type (like a struct).  
+- It describes a behavior or action that instances of the struct can perform.  
+- Example: Methods like `.push_str` or `.clone` are actions you can perform on strings.
+
+**How to Call a Method**  
+- Use the instance name followed by a dot `.` and the method name with parentheses.  
+  Example: `my_string.push_str("world");`  
+
+### Steps to Define a Method for a Struct
+
+1. **Create the Struct**  
+   Example struct for a Taylor Swift song:  
+   ```rust
+   #[derive(Debug)]
+   struct TaylorSwiftSong {
+       title: String,
+       release_year: u32,
+       duration_secs: u32,
+   }
+   ```
+
+2. **Define Methods with `impl`**  
+   - Use `impl` (short for "implementation") to add methods to the struct.  
+   - Inside `impl`, define all methods related to the struct.  
+   ```rust
+   impl TaylorSwiftSong {
+       fn display_song_info(self) {
+           println!("Title: {}", self.title);
+           println!("Release Year: {}", self.release_year);
+           println!("Duration: {} seconds", self.duration_secs);
+       }
+   }
+   ```
+
+3. **Understanding the `self` Parameter**  
+   - The first parameter in every method is `self`, representing the instance of the struct.  
+   - It tells the method which struct instance it’s working on.  
+   - There are **4 ways** to pass `self`:  
+     1. **Immutable value** (`self`): Takes ownership, cannot modify.  
+     2. **Mutable value** (`mut self`): Takes ownership, can modify.  
+     3. **Immutable reference** (`&self`): No ownership, cannot modify.  
+     4. **Mutable reference** (`&mut self`): No ownership, can modify.
+
+4. **Advantages of Methods in Rust**  
+   - Organize struct behaviors in one place.  
+   - Every instance of the struct automatically gets access to its methods.  
+   - Methods make code reusable and maintainable.
+
+### Example: Create and Use the Struct with a Method
+
+```rust
+fn main() {
+    // Create a struct instance
+    let song = TaylorSwiftSong {
+        title: String::from("Blank Space"),
+        release_year: 2014,
+        duration_secs: 231,
+    };
+
+    // Call the method on the struct
+    song.display_song_info();
+}
+```
+
+### Key Points to Remember  
+- Methods live inside an `impl` block.  
+- Use `self` to represent the struct instance in a method.  
+- Methods can take ownership or references (mutable or immutable).  
+- A method behaves just like a function but is tightly linked to its struct.  
+- Rust handles passing `self` automatically when you call the method.  
+
+
+
