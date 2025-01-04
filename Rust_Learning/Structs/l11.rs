@@ -15,7 +15,7 @@ impl OnePiece {
 
     fn OnePieceMovie(mut self) {
         self.duration = 100 + self.duration;
-        println!("The Z movie length is {}", self.duration);
+        println!("The Z movie length is {:#?}", self.duration);
     }
 }
 
