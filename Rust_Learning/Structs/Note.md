@@ -484,5 +484,50 @@ fn main() {
 - A method behaves just like a function but is tightly linked to its struct.  
 - Rust handles passing `self` automatically when you call the method.  
 
+---
+---
 
+### L11: Mutable Methods in Rust
+
+1. **Defining a Mutable Method**  
+   - A method can change (mutate) the data inside a struct.  
+   - To allow this, we use `mut self` as a parameter.  
+     - `self` = the actual struct instance.  
+     - `mut` = makes the instance mutable, so fields can be updated.  
+
+2. **Example: Doubling a Song's Length**  
+   - We define a method `double_length` for a `TaylorSwiftSong` struct.  
+   - This method:  
+     - Updates the field `duration_secs` by multiplying it by 2.  
+     - Saves the new value back into the struct.  
+
+   ```rust
+   impl TaylorSwiftSong {
+       fn double_length(mut self) {
+           self.duration_secs *= 2; // Multiply current value by 2 and save it.
+           println!("{:#?}", self); // Print the updated struct in debug format.
+       }
+   }
+   ```
+
+3. **Ownership and Mutability Rules**  
+   - When a method takes `self` (even `mut self`):  
+     - It **takes ownership** of the struct instance.  
+     - This means you **cannot use the instance again** after calling the method unless you return it.  
+     - Example: If you call `song.double_length()`, `song` is no longer usable afterward.  
+
+4. **Printing the Struct**  
+   - Use `println!("{:?}", self)` to print the struct in debug format.  
+   - Add `#[derive(Debug)]` to your struct to enable this.  
+
+5. **Why Use `mut self`?**  
+   - Allows you to change fields of the struct inside the method.  
+   - Useful when you need to update or modify the struct’s data directly.  
+
+6. **Limitations of `mut self`**  
+   - Once a method takes ownership of the struct (`self`), you lose it unless you return it.  
+   - A better approach for many situations is using references (`&mut self`) to avoid losing ownership.  
+
+### Summary  
+Mutable methods let you directly update a struct’s fields. However, you need to be careful with ownership rules because using `self` gives the method full control of the struct.
 
