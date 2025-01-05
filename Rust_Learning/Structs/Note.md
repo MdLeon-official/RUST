@@ -746,3 +746,99 @@ This example demonstrates how to define and use methods with parameters while ma
 
 --- 
 ---
+
+# L14: Invoking Methods Within Methods
+
+## Key Concepts:
+1. **Single Responsibility Principle**:
+   - Methods should perform one specific task.
+   - Breaking down functionality into smaller methods makes code easier to read, maintain, and reuse.
+
+2. **Invoking Methods Within Methods**:
+   - A method can invoke other methods on the same struct instance using `self`.
+   - This is useful for reusing logic and maintaining modularity.
+
+## Example: Calculating Years Since Release
+
+### Struct Definition
+
+```rust
+struct TaylorSwiftSong {
+    title: String,
+    release_year: u32,
+    duration_secs: u32,
+}
+```
+
+### Adding Methods
+
+```rust
+impl TaylorSwiftSong {
+    // Method to calculate years since release
+    fn years_since_release(&self) -> u32 {
+        2024 - self.release_year
+    }
+
+    // Method to display song information
+    fn display_song_info(&self) {
+        println!("Title: {}", self.title);
+        println!("Release Year: {}", self.release_year);
+        println!("Duration (secs): {}", self.duration_secs);
+        println!("Years since Release: {}", self.years_since_release());
+    }
+}
+```
+
+### Key Details:
+1. **`years_since_release` Method**:
+   - Accepts `&self` for an immutable reference.
+   - Calculates the number of years since the song's release by subtracting `release_year` from the current year (e.g., `2024`).
+   - Returns a `u32` (unsigned 32-bit integer).
+
+2. **`display_song_info` Method**:
+   - Uses `self` to access fields (`title`, `release_year`, etc.) and methods (`years_since_release`).
+   - Invokes `years_since_release()` to dynamically calculate and display the years since release.
+
+### Using the Methods
+
+```rust
+fn main() {
+    // Create a song instance
+    let blank_space = TaylorSwiftSong {
+        title: String::from("Blank Space"),
+        release_year: 2014,
+        duration_secs: 231,
+    };
+
+    // Display song information
+    blank_space.display_song_info();
+}
+```
+
+### Output
+
+```
+Title: Blank Space
+Release Year: 2014
+Duration (secs): 231
+Years since Release: 10
+```
+
+## Key Benefits:
+1. **Reusability**:
+   - The `years_since_release` method can be reused in multiple contexts, making the logic modular and concise.
+
+2. **Simpler Code**:
+   - Breaking logic into smaller methods reduces redundancy and improves readability.
+
+3. **Decoupling**:
+   - Separating responsibilities ensures each method handles only one concern, making the code easier to debug and maintain.
+
+## Summary:
+- Define smaller methods for single responsibilities.
+- Reuse these methods by invoking them from other methods using `self`.
+- This approach improves code clarity, reusability, and modularity, aligning with best practices in software design.
+
+---
+---
+
