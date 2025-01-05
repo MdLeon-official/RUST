@@ -531,3 +531,120 @@ fn main() {
 ### Summary  
 Mutable methods let you directly update a struct’s fields. However, you need to be careful with ownership rules because using `self` gives the method full control of the struct.
 
+---
+---
+
+
+
+### L12: 4 Ways to Define `self` in Rust
+
+In Rust, methods can interact with a struct in 4 different ways using the `self` parameter. Each option determines how the method interacts with the struct's data and ownership.
+
+---
+
+### 1. **Immutable Instance (`self`)**  
+- **What it means**: The method owns a **copy** of the struct but cannot modify its fields.  
+- **When to use**: When you only need to read the struct’s data without changing or returning it.  
+
+```rust
+fn display_song_info(self) {
+    println!("{:?}", self); // Print struct info (Debug format).
+}
+```
+
+- **Drawback**: Ownership is transferred to the method. The struct cannot be used afterward unless you return it.
+
+### 2. **Mutable Instance (`mut self`)**  
+- **What it means**: The method owns a **copy** of the struct and can modify its fields.  
+- **When to use**: When you need to update the struct’s fields but don’t need to pass ownership back.  
+
+```rust
+fn double_length(mut self) {
+    self.duration_secs *= 2; // Double the song length.
+    println!("{:?}", self);
+}
+```
+
+- **Drawback**: Ownership is transferred to the method, so the struct is no longer usable afterward.
+
+### 3. **Immutable Reference (`&self`)**  
+- **What it means**: The method **borrows** the struct and cannot modify its fields.  
+- **When to use**: When you want to read data without taking ownership.  
+
+```rust
+fn display_song_info(&self) {
+    println!("{:?}", self); // No ownership moved.
+}
+```
+
+- **Advantage**: Ownership is retained, and the struct can still be used after the method call.
+
+### 4. **Mutable Reference (`&mut self`)**  
+- **What it means**: The method **borrows** the struct and can modify its fields.  
+- **When to use**: When you need to update the struct’s fields without taking ownership.  
+
+```rust
+fn double_length(&mut self) {
+    self.duration_secs *= 2; // Double the song length.
+}
+```
+
+- **Advantage**: Ownership is retained, and the struct can still be used after the method call.
+
+### Example: Combining Methods  
+
+```rust
+struct TaylorSwiftSong {
+    title: String,
+    duration_secs: u32,
+}
+
+impl TaylorSwiftSong {
+    fn display_song_info(&self) {
+        println!("Title: {}, Duration: {} seconds", self.title, self.duration_secs);
+    }
+
+    fn double_length(&mut self) {
+        self.duration_secs *= 2;
+    }
+}
+
+fn main() {
+    let mut song = TaylorSwiftSong {
+        title: String::from("Love Story"),
+        duration_secs: 231,
+    };
+
+    // Display info (immutable reference)
+    song.display_song_info();
+
+    // Double the length (mutable reference)
+    song.double_length();
+
+    // Display updated info
+    song.display_song_info();
+}
+```
+
+### Output:
+```
+Title: Love Story, Duration: 231 seconds
+Title: Love Story, Duration: 462 seconds
+```
+
+### Summary of `self` Options  
+
+| **Option**        | **Definition**                 | **Ownership** | **Mutability** | **Use Case**                       |
+|--------------------|-------------------------------|---------------|----------------|------------------------------------|
+| `self`            | Immutable instance            | Transferred   | Immutable      | Read-only and takes full ownership. |
+| `mut self`        | Mutable instance              | Transferred   | Mutable        | Modifies and takes full ownership.  |
+| `&self`           | Immutable reference           | Borrowed      | Immutable      | Read-only without taking ownership. |
+| `&mut self`       | Mutable reference             | Borrowed      | Mutable        | Modifies without taking ownership.  |
+
+### Key Points:  
+1. **References (`&self` or `&mut self`) are preferred**: They don’t transfer ownership, so you can use the struct after the method call.  
+2. **Rust handles references automatically** when calling methods. You don’t need to explicitly pass `&song` or `&mut song`.  
+3. Using references is the “Rust way” to work with structs efficiently and safely.  
+
+---
+---
