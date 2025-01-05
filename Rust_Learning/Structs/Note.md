@@ -648,3 +648,101 @@ Title: Love Story, Duration: 462 seconds
 
 ---
 ---
+
+
+# L13: Struct Methods and Parameters
+
+## Key Points:
+1. **Methods in Structs**:
+   - Methods are similar to regular functions but are defined within the context of a struct.
+   - The first parameter of a method is always `self` (or a variant of it).
+
+2. **The `self` Parameter**:
+   - `self` represents the instance of the struct that the method is called on.
+   - There are 4 variations of `self`:
+     - `self`: Immutable instance (takes ownership).
+     - `mut self`: Mutable instance (takes ownership).
+     - `&self`: Immutable reference (borrows without ownership).
+     - `&mut self`: Mutable reference (borrows without ownership).
+
+3. **Additional Parameters**:
+   - After `self`, you can define as many additional parameters as needed.
+   - These parameters require explicit arguments when the method is called.
+
+4. **No Explicit `self` Argument**:
+   - When invoking a method, Rust automatically passes `self` (or its variant) behind the scenes.
+   - Only additional parameters after `self` need explicit arguments.
+
+## Example: Comparing Two Structs
+
+Let's define a method that compares two instances of the same struct:
+
+```rust
+struct TaylorSwiftSong {
+    title: String,
+    release_year: u32,
+    duration_secs: u32,
+}
+
+impl TaylorSwiftSong {
+    // Method to compare durations
+    fn is_longer_than(&self, other: &TaylorSwiftSong) -> bool {
+        self.duration_secs > other.duration_secs
+    }
+}
+
+fn main() {
+    // Create two song instances
+    let blank_space = TaylorSwiftSong {
+        title: String::from("Blank Space"),
+        release_year: 2014,
+        duration_secs: 231,
+    };
+
+    let all_too_well = TaylorSwiftSong {
+        title: String::from("All Too Well"),
+        release_year: 2012,
+        duration_secs: 327,
+    };
+
+    // Compare durations
+    if blank_space.is_longer_than(&all_too_well) {
+        println!("{} is longer than {}", blank_space.title, all_too_well.title);
+    } else {
+        println!(
+            "{} is shorter than or equal to {}",
+            blank_space.title, all_too_well.title
+        );
+    }
+}
+```
+
+## Breakdown:
+1. **Method Definition**:
+   - `&self`: Method borrows the current instance immutably.
+   - `other: &TaylorSwiftSong`: Accepts an immutable reference to another instance.
+
+2. **Calling the Method**:
+   - `blank_space.is_longer_than(&all_too_well)`:
+     - Rust automatically passes `&blank_space` as `self`.
+     - We explicitly pass `&all_too_well` for the `other` parameter.
+
+3. **Output**:
+   - If `blank_space`'s `duration_secs` is greater than `all_too_well`'s, it prints:
+     ```
+     Blank Space is longer than All Too Well
+     ```
+   - Otherwise:
+     ```
+     Blank Space is shorter than or equal to All Too Well
+     ```
+
+### Summary:
+- Struct methods must always include `self` as the first parameter.
+- Additional parameters allow for custom logic.
+- Rust takes care of passing `self` automatically during method calls.
+
+This example demonstrates how to define and use methods with parameters while maintaining ownership or borrowing in Rust.
+
+--- 
+---
