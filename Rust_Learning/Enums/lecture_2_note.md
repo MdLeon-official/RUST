@@ -1,38 +1,11 @@
 # Rust Enums with Associated Data
 
-## Enum Basics
-- An **enum** is a type that represents a set of possible values.
-- Each possible value in an enum is called a **variant**.
-- Enums can also store additional data (associated values) with their variants.
-
-### Declaring an Enum
-1. Use the `enum` keyword.
-2. Write the name of the enum in **PascalCase**.
-3. Use curly braces `{}` to list the variants.
-4. Derive the `Debug` trait for easy printing using `#[derive(Debug)]`.
-
-```rust
-#[derive(Debug)]
-enum PaymentMethodType {
-    CreditCard,
-    DebitCard,
-    PayPal,
-}
-```
-
-### Creating Enum Instances
-- Use the `enum` name and the `::` syntax to reference a specific variant.
-
-```rust
-fn main() {
-    let visa = PaymentMethodType::CreditCard;
-    println!("{:?}", visa);
-}
-```
-
 ## Enum Variants with Associated Data
-- Variants can store data, similar to struct fields.
-- Use parentheses `()` after the variant name to define associated data types.
+- Variants can store additional data using tuple-like syntax `(Type)`.
+- Each variant can store different amounts or types of associated data.
+
+### Declaring Enums with Unified Data
+- Example where all variants store one piece of associated data:
 
 ```rust
 #[derive(Debug)]
@@ -43,56 +16,35 @@ enum PaymentMethodType {
 }
 ```
 
-### Example with Associated Data
+### Instantiating Enum Variants
+- Use the variant name with a tuple of the respective data.
+- Example of creating instances:
+
 ```rust
 fn main() {
-    // Creating instances with associated data
     let visa = PaymentMethodType::CreditCard(String::from("5678"));
     let mastercard = PaymentMethodType::DebitCard(String::from("2532-1298"));
 
-    // Printing instances
     println!("{:?}", visa);
     println!("{:?}", mastercard);
 }
 ```
 
-### How It Works
-- The data types declared with each variant must match the data provided during instantiation.
-- For example:
-  - `CreditCard(String)` expects a `String`.
-  - Use `String::from("...")` to create a `String`.
+### Key Points
+- Associated data can be provided:
+  - Inline during instantiation, e.g., `String::from("5678")`.
+  - Using variables that hold the data.
+- Rust enforces the correct data type and number of elements for each variant.
 
-## Real-World Use Cases
-Enums with associated data are useful when:
-- A variant needs extra information to fully represent its value.
-- Examples:
-  - Payment methods (e.g., `CreditCard` with a card number).
-  - States in a game (e.g., `Playing(score: u32)`, `Paused`).
-  - Error handling (e.g., `IoError(String)`, `ParseError`).
+---
 
-### Behind the Scenes
-- Each variant becomes a function that:
-  - Constructs an instance of the enum.
-  - Accepts the associated data as arguments.
-- Example:
-  - `PaymentMethodType::CreditCard(String::from("5678"))` calls the constructor for `CreditCard`.
-
-### Debug Representation
-- Use `println!("{:?}", ...)` to print the enum.
-- Includes the variant name and its associated data.
-
-### Ownership Rules
-- Enum instances follow Rust's ownership principles.
-- Moving an enum to a new variable transfers ownership of its associated data.
-- Passing an enum to a function gives the function ownership of the enum.
-
-### Variants with Multiple Data Types
-- Variants can store multiple pieces of data.
+## Advanced: Variants with Multiple Data Fields
+- A variant can store more than one piece of associated data:
 
 ```rust
 #[derive(Debug)]
 enum PaymentMethodType {
-    CreditCard(String, i32, bool),
+    CreditCard(String, i32, bool), // Example with three fields
     DebitCard(String),
     PayPal(String),
 }
@@ -103,9 +55,24 @@ fn main() {
 }
 ```
 
-## Summary
-- Enums represent a limited set of possible values.
-- Variants can have associated data to store additional information.
-- Use enums to create more structured and meaningful types in your Rust programs.
+---
 
+## Debug Representation
+- Printing enums with `println!("{:?}", ...)` will show:
+  - The variant name.
+  - All associated data in the order it is declared.
 
+Example Output:
+```
+CreditCard("5678")
+DebitCard("2532-1298")
+```
+
+---
+
+## Usage Tips
+- Use enums with associated data when you need to:
+  - Group related data under meaningful variants.
+  - Ensure type safety for representing distinct states or categories.
+- Examples:
+  - Representing payment methods, states, or errors in an application.
