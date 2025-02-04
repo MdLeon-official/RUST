@@ -8,14 +8,12 @@ fn main() {
     let t: i32 = inp_num.trim().parse().expect("Failed to parse input");
 
     for _ in 0..t {
-        // Read the number of candies
         let mut inp_n = String::new();
         io::stdin()
             .read_line(&mut inp_n)
             .expect("Failed to read input");
         let n: usize = inp_n.trim().parse().expect("Failed to parse input");
 
-        // Read the weights of the candies
         let mut inp_weights = String::new();
         io::stdin()
             .read_line(&mut inp_weights)
