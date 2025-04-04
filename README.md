@@ -1,33 +1,69 @@
-### RUST
+# 🦀 RUST
 
-A repository dedicated to my journey in learning and experimenting with the Rust programming language.
+![Learning Rust]([https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif](https://cdnb.artstation.com/p/assets/images/images/042/806/685/original/terrified-of-ice-cream-ferrisrust-frame.gif?1635480129))
 
-🌟 About
+Welcome to my Rust repository! This is a collection of Rust programs, practice problems, and mini projects that I’m working on as I learn the language.
 
-    This repository contains:
+## 🚀 About
 
-    Sample programs and scripts to practice Rust basics.
-    Projects exploring Rust’s core features, including ownership, concurrency, and memory safety.
-    Solutions to Rust-based challenges or exercises.
-    Hacking tools (coming soon!) developed as part of my cybersecurity practice.
+This repo includes:
 
-📂 Structure
+- 🧪 Practice problems from platforms like [Codeforces](https://codeforces.com).
+- 📚 Notes and code snippets as I explore Rust's syntax and core concepts
+- 💡 Concepts like ownership, borrowing, pattern matching, error handling, modules, etc.
+- ⚙️ Small utilities and scripts (e.g., converters, algorithms, CLI tools) 
 
-    /basics/: Fundamental concepts and syntax examples.
-    /projects/: Mini projects built to understand Rust in real-world scenarios.
-    /challenges/: My solutions to various Rust programming challenges.
-    /tools/: Custom hacking tools developed in Rust (to be added).
+The goal is to build a strong foundation in Rust while writing clean and idiomatic code.
 
-🚀 Goals
+---
 
-    Master Rust fundamentals.
-    Build secure, efficient, and scalable programs.
-    Apply Rust in system-level programming and cybersecurity tools.
-    Leverage Rust to create tools for ethical hacking and cybersecurity.
+## 📚 Course
 
-📚 Resources
+I'm currently learning Rust through the [Learn to Code with Rust](https://www.udemy.com/course/learn-to-code-with-rust/) course on Udemy. This repo reflects what I’m learning and building along the way.
 
-    online code editor: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
-    Rust by practice: https://practice.course.rs/
-    Book: https://doc.rust-lang.org/book/
-    Docs: https://www.rust-lang.org/learn
+---
+
+## 🔐 Future Goals
+
+As I grow more comfortable with Rust, I plan to build **cybersecurity-related projects and tools**—leveraging Rust's speed and safety for secure coding, penetration testing tools, and CTF utilities.
+
+---
+
+## 🛠️ Tools & Tech
+
+- Language: [Rust](https://www.rust-lang.org/)
+- Package manager: [Cargo](https://doc.rust-lang.org/cargo/)
+- Editor: VSCode + Zed
+
+---
+
+## 🧠 Topics I'm Exploring
+
+- ✅ Ownership & Borrowing
+- ✅ Pattern Matching
+- ✅ Structs and Enums
+- ✅ Traits and Generics
+- ✅ Error Handling (`Result`, `Option`)
+- ✅ File Handling & I/O
+- ✅ Modules & Crate organization
+
+---
+
+
+
+## 🤝 Contributions
+
+This is a personal learning repo, but if you have suggestions or want to collaborate on mini Rust projects, feel free to open an issue or pull request.
+
+---
+
+## 📜 License
+
+This project is open source under the [MIT License](LICENSE).
+
+---
+
+## ✨ Credits
+
+Made with ❤️ and 🦀 by LEON
+```
