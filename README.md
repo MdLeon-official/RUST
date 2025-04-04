@@ -1,6 +1,6 @@
 # 🦀 RUST
 
-![Learning Rust]([https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif](https://cdnb.artstation.com/p/assets/images/images/042/806/685/original/terrified-of-ice-cream-ferrisrust-frame.gif?1635480129))
+![Learning Rust](https://cdnb.artstation.com/p/assets/images/images/042/806/685/original/terrified-of-ice-cream-ferrisrust-frame.gif?1635480129))
 
 Welcome to my Rust repository! This is a collection of Rust programs, practice problems, and mini projects that I’m working on as I learn the language.
 
