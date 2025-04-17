@@ -1,22 +1,40 @@
 # Mutable Parameters
 
 
-1. **Ownership Transfer**: 
-   - When passing data to a function, ownership can be **moved** or **copied** depending on whether the type implements the `Copy` trait.
-   - If a variable (like a `String`) doesn't implement the `Copy` trait, ownership will be transferred (moved) to the function parameter. The original variable can no longer be used after this transfer.
+In Rust, function parameters are **immutable by default**, just like variables. This means you can't change their values inside the function unless you explicitly declare them as mutable.
 
-2. **Immutability of Function Parameters**: 
-   - By default, function parameters are **immutable**, meaning you can't modify the data they hold unless you explicitly mark them as `mut`.
-   - When transferring ownership to an immutable parameter, you can no longer mutate the data, as seen with the string "Burger" being passed to `add_fries`.
+#### Key Concepts:
+1. **Immutability by Default**:
+   - If you want to modify a parameter within a function, you must declare it as `mut` (mutable).
+   - Without this, you can't perform mutative operations like `.push_str()` on the parameter.
+
+2. **Ownership Transfer**:
+   - When you pass an owned value (like a `String`) into a function, **ownership moves** from the calling function to the function's parameter.
+   - **Important:** The **parameter is immutable by default**, so it can't modify the value unless it's declared as mutable.
+
+#### Example:
+```rust
+fn add_fries(meal: String) {
+    meal.push_str(" and fries"); // Error because meal is immutable
+}
+```
+
+- Even if the original `burger` string is mutable, ownership is moved to `meal`, which is immutable. Thus, you cannot mutate it inside the function.
 
 3. **Making Parameters Mutable**:
-   - If you need to mutate the data in the function, you must declare the parameter as `mut`.
-   - This allows you to use methods like `push_str` to modify the string inside the function.
+   - To mutate a parameter inside the function, you must declare it as `mut`.
+   
+```rust
+fn add_fries(mut meal: String) {
+    meal.push_str(" and fries"); // Works now because meal is mutable
+}
+```
 
-4. **Rust Compiler Warnings**:
-   - The compiler will warn you if you're using a mutable variable but not modifying it. It helps keep your code safe and clean by suggesting unnecessary `mut` keywords be removed.
+4. **Why Mutable `burger` Isn't Enough**:
+   - **Ownership** is what's important, not whether the original variable is mutable. When ownership is transferred, you need to ensure that the new owner (parameter) is mutable if you want to modify it.
 
-### Key Takeaways:
-- **Ownership transfer** means you lose access to the original variable after passing it to a function.
-- **Immutability** is the default for function parameters. To mutate data inside the function, use `mut` with the parameter.
-- The **Rust compiler** helps by providing warnings when you misuse mutability or ownership, making your code more robust and easier to maintain.
+5. **Compiler Warnings**:
+   - Rust will warn you if a variable is mutable but isn't mutated. In the example, if `burger` isn't changed, the compiler might tell you it doesn't need to be mutable.
+
+#### Remembering Tip:
+- Think of **ownership** like a **ticket**. You transfer the ticket (ownership) to someone else, and that person can either keep it mutable or immutable. If they keep it immutable, they can't make changes, but if it's mutable, they can!
